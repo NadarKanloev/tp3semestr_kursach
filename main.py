@@ -3,6 +3,15 @@ import psycopg2
 from os import path
 from config import host, user, password, db_name
 
+
+connection = psycopg2.connect(
+            host=host,
+            user=user,
+            password=password,
+            database=db_name)
+sql = connection.cursor()
+connection.autocommit = True
+
 def user_input():
     path = str
     print("Вы будете работать со своим csv или с transactions.csv?")
@@ -102,13 +111,6 @@ class data_base:
 
 def main():
     try:
-        connection = psycopg2.connect(
-            host=host,
-            user=user,
-            password=password,
-            database=db_name)
-        sql = connection.cursor()
-        connection.autocommit = True
     except Exception as e:
         print("Ошибка подключения к Базе данных", e)
     finally:
